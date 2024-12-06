@@ -34,7 +34,7 @@
                 </div>
 
                 <!-- Delete Button -->
-                <div v-if="product.user_id === $page.props.auth.user?.d" class="flex flex-col items-center gap-10 md:flex-row">
+                <div v-if="product.user_id === $page.props.auth.user?.id" class="flex flex-col items-center gap-10 md:flex-row">
                     <form :action="`/products/${product.id}`" method="POST" @submit.prevent="deleteProduct">
                         <Button type="submit" >Delete Product</Button>
                     </form>
