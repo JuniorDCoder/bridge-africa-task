@@ -13,7 +13,7 @@
                 <p v-else class="text-sm font-semibold text-gray-700">€{{ product.price }}</p>
                 <p v-if="product.giveaway_price">|</p>
                 <p v-if="product.giveaway_price" class="text-sm font-semibold text-secondary">€{{ product.giveaway_price }}</p>
-                <Button v-if="!route().current('my-products')" @click="addToCart" fill="secondary" textColor="white" class="w-full md:w-1/2">Add to Cart</Button>
+                <Button v-if="!product.id === $page.props.auth.user.id" @click="addToCart" fill="secondary" textColor="white" class="w-full md:w-1/2">Add to Cart</Button>
             </div>
         </div>
     </div>
@@ -24,8 +24,6 @@ import Button from './Button.vue';
 import { Link , useForm} from '@inertiajs/vue3';
 // import { toast } from 'vue3-toastify'
 import { computed } from 'vue';
-// import { incrementCartCount } from '@/stores/cartStore';
-// import { addProductToCart } from '../helpers/globalHelper';
 
 const props = defineProps({
     product: Object

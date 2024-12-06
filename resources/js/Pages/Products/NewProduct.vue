@@ -1,6 +1,15 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
+import TextInput from '@/Components/TextInput.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/InputError.vue';
+import Button from '@/Components/Button.vue';
+import { toast } from 'vue3-toastify'
+
+defineProps({
+    categories: [Array, Object]
+})
 
 const form = useForm({
     name: '',
@@ -8,17 +17,25 @@ const form = useForm({
     details: '',
     price: '',
     giveaway_price: '',
-    in_stock: false,
-    category_id: '',
+    in_stock: true,
     image: null,
-    images: []
+    category_id: '',
+    images: [],
 });
+const handleFileChange = (event) => {
+    form.image = event.target.files[0];
+};
 
-const submit = () => {
+const handleMultipleFilesChange = (event) => {
+    form.images = Array.from(event.target.files);
+};
+
+const submitForm = () => {
     form.post(route('store-product'), {
+        preserveScroll: true,
         onSuccess: () => {
-            alert('Product created successfully!');
-        }
+            toast.success("Product Created Successfully")
+        },
     });
 };
 </script>
@@ -35,121 +52,96 @@ const submit = () => {
 
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="p-6 bg-white shadow-md sm:rounded-lg">
-                    <form @submit.prevent="submit">
-                        <!-- Product Name -->
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                v-model="form.name"
-                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                required
-                            />
-                        </div>
-
-                        <!-- Description -->
-                        <div class="mb-4">
-                            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                            <textarea
-                                id="description"
-                                v-model="form.description"
-                                rows="3"
-                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                required
-                            ></textarea>
-                        </div>
-
-                        <!-- Details -->
-                        <div class="mb-4">
-                            <label for="details" class="block text-sm font-medium text-gray-700">Details (HTML)</label>
-                            <textarea
-                                id="details"
-                                v-model="form.details"
-                                rows="5"
-                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            ></textarea>
-                        </div>
-
-                        <!-- Price -->
-                        <div class="mb-4">
-                            <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                            <input
-                                type="number"
-                                id="price"
-                                v-model="form.price"
-                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                required
-                            />
-                        </div>
-
-                        <!-- Giveaway Price -->
-                        <div class="mb-4">
-                            <label for="giveaway_price" class="block text-sm font-medium text-gray-700">Giveaway Price</label>
-                            <input
-                                type="number"
-                                id="giveaway_price"
-                                v-model="form.giveaway_price"
-                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            />
-                        </div>
-
-                        <!-- In Stock -->
-                        <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">In Stock</label>
-                            <input
-                                type="checkbox"
-                                v-model="form.in_stock"
-                                class="text-indigo-600 border-gray-300 rounded shadow-sm focus:ring-indigo-500"
-                            />
-                        </div>
-
-                        <!-- Category -->
-                        <div class="mb-4">
-                            <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
-                            <input
-                                type="number"
-                                id="category_id"
-                                v-model="form.category_id"
-                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                required
-                            />
-                        </div>
-
-                        <!-- Main Image -->
-                        <div class="mb-4">
-                            <label for="image" class="block text-sm font-medium text-gray-700">Main Image</label>
-                            <input
-                                type="file"
-                                id="image"
-                                @change="form.image = $event.target.files[0]"
-                                class="block w-full mt-1"
-                            />
-                        </div>
-
-                        <!-- Additional Images -->
-                        <div class="mb-4">
-                            <label for="images" class="block text-sm font-medium text-gray-700">Additional Images</label>
-                            <input
-                                type="file"
-                                id="images"
-                                multiple
-                                @change="form.images = Array.from($event.target.files)"
-                                class="block w-full mt-1"
-                            />
-                        </div>
-
-                        <!-- Submit Button -->
-                        <button
-                            type="submit"
-                            class="inline-flex items-center px-4 py-2 font-semibold tracking-widest text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 active:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-300 disabled:opacity-25"
-                        >
-                            Submit
-                        </button>
-                    </form>
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        Upload a new Product
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="flex flex-col w-full max-w-4xl gap-6 px-6 py-12 mx-auto bg-white rounded-lg shadow-md">
+            <form @submit.prevent="submitForm" class="flex flex-col gap-4" enctype="multipart/form-data">
+                <div>
+                    <InputLabel value="Product Name" />
+                    <TextInput v-model="form.name" type="text" autofocus />
+                    <InputError :message="form.errors.name" />
+                </div>
+
+                <div>
+                    <InputLabel value="Description" />
+                    <TextInput v-model="form.description" type="text" />
+                    <InputError :message="form.errors.description" />
+                </div>
+
+                <div>
+                    <InputLabel value="Details" />
+                    <TextInput v-model="form.details" type="text" />
+                    <InputError :message="form.errors.details" />
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <InputLabel value="Price" />
+                        <TextInput v-model="form.price" type="number" step="0.01" />
+                        <InputError :message="form.errors.price" />
+                    </div>
+
+                    <div class="flex-1">
+                        <InputLabel value="Giveaway Price" />
+                        <TextInput v-model="form.giveaway_price" type="number" step="0.01" />
+                        <InputError :message="form.errors.giveaway_price" />
+                    </div>
+                </div>
+
+                <div>
+                    <InputLabel value="Category" />
+                    <select v-model="form.category_id" class="p-3 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        <option value="">Select a Category</option>
+                        <option v-for="category in categories" :value="category.id" :key="category.id">{{category.name}}</option>
+
+                    </select>
+                    <InputError :message="form.errors.category_id" />
+                </div>
+
+                <div>
+                    <InputLabel value="Main Image" />
+                    <input
+                        type="file"
+                        id="image"
+                        class="block w-full px-3 py-2 mt-1 text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        @change="handleFileChange"
+                    />
+                    <InputError :message="form.errors.image" class="mt-2" />
+                </div>
+
+
+                <div>
+                    <InputLabel value="Additional Images" />
+                    <input
+                        type="file"
+                        id="additional-images"
+                        class="block w-full px-3 py-2 mt-1 text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        name="images[]"
+                        multiple
+                        @change="handleMultipleFilesChange"
+                    />
+
+                    <InputError :message="form.errors.images" />
+                </div>
+
+                <div>
+                    <InputLabel value="In Stock" />
+                    <input v-model="form.in_stock" type="checkbox" class="rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                    <InputError :message="form.errors.in_stock" />
+                </div>
+
+                <div class="flex justify-end gap-4 mt-4">
+                    <Button type="reset" >Reset</Button>
+                    <Button type="submit"  fill="secondary" textColor="white" >Create Product</Button>
+                </div>
+            </form>
         </div>
     </AuthenticatedLayout>
 </template>

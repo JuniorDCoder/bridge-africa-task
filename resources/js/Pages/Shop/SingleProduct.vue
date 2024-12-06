@@ -16,13 +16,13 @@
                     <p v-if="product.giveaway_price" class="text-sm font-semibold text-gray-700">€{{ product.giveaway_price }}</p>
                 </div>
                 <p class="text-gray-700 md:w-4/5 text-md">{{product.description}} </p>
-                <div class="flex w-1/3 md:w-1/5 items-center justify-center md: gap-5 px-2 py-2.5 border border-gray-500 text-gray-700 rounded-sm">
+                <div   v-if="product.user_id !== $page.props.auth.user.id" class="flex w-1/3 md:w-1/5 items-center justify-center md: gap-5 px-2 py-2.5 border border-gray-500 text-gray-700 rounded-sm">
                     <span @click="decrementQuantity" class="text-2xl cursor-pointer select-none">-</span>
                     <span class="text-2xl cursor-pointer">{{quantity}}</span>
                     <span @click="incrementQuantity" class="text-2xl cursor-pointer select-none">+</span>
                 </div>
                 <p class="text-gray-700">Category: <span>&nbsp;&nbsp;{{product.category.name}}</span> </p>
-                <div class="flex items-center justify-between gap-8 md:w-2/3">
+                <div v-if="product.user_id !== $page.props.auth.user.id" class="flex items-center justify-between gap-8 md:w-2/3">
                     <Button @click="addToCart" fill="white" textColor="secondary" class="w-full md:w-1/2">Add to Cart</Button>
                     <Button :is-link="true" :url="{path: 'shop'}" fill="secondary" textColor="white" class="w-full md:w-1/2">Pay Now</Button>
                 </div>
@@ -32,10 +32,18 @@
                     <p>Need some help? </p>
                     <Link href="/" class="text-secondary">Contact Us</Link>
                 </div>
+
+                <!-- Delete Button -->
+                <div v-if="product.user_id === $page.props.auth.user.id" class="flex flex-col items-center gap-10 md:flex-row">
+                    <form :action="`/products/${product.id}`" method="POST" @submit.prevent="deleteProduct">
+                        <Button type="submit" >Delete Product</Button>
+                    </form>
+                    <Button is-link="true"  fill="secondary" textColor="white" :url="{path: `/product`+`/${product.id}/edit`}" >Edit Product</Button>
+                </div>
+
             </div>
         </div>
         <hr class="w-full mb-4 border-gray-300" />
-
     </BaseLayout>
 </template>
 
@@ -44,38 +52,38 @@ import BaseLayout from '@//Layouts/BaseLayout.vue'
 import Button from '@/Components/Button.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
-// import { toast } from 'vue3-toastify'
-// import { incrementCartCount } from '@/stores/cartStore';
-// import { addProductToCart } from '../../helpers/globalHelper';
 
-const quantity = ref(1)
+const quantity = ref(1);
+
 
 const incrementQuantity = () => {
-    quantity.value++
-}
+    quantity.value++;
+};
 
 const decrementQuantity = () => {
     if (quantity.value > 1) {
-        quantity.value--
+        quantity.value--;
     }
-}
-const props = defineProps({
-    product: Object
-})
-
-const form = useForm({
-    product: props.product
-});
-
-const showDescription = ref(true);
-
-const addToCart = () => {
-    // addProductToCart(form, props.product, quantity.value)
 };
 
-const updateProduct = (item, operation) => {
-    updateProductQuantity(item, operation)
-}
+const props = defineProps({
+    product: Object,
+});
+
+const form = useForm({
+    product: props.product,
+});
+
+const addToCart = () => {
+    // Handle add to cart
+};
+
+const deleteProduct = async () => {
+    if (confirm('Are you sure you want to delete this product?')) {
+        form.delete(route('product.delete', {product: form.product}), {
+    });
+    }
+};
 </script>
 
 <style scoped>

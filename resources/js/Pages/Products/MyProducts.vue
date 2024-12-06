@@ -23,7 +23,7 @@ console.log(props.products)
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="px-4 py-12 md:px-0">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
@@ -35,7 +35,7 @@ console.log(props.products)
             </div>
 
         </div>
-        <div class="flex flex-col w-full gap-3 py-12 md:px-24">
+        <div class="flex flex-col w-full gap-3 px-4 py-12 md:px-24">
             <Button :is-link="true" :url="{path: 'create-product'}" fill="secondary" textColor="white" class="w-full mb-5">Upload New Product</Button>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <ShopItem v-for="product in (products?.data || [])" :key="product.id" :product="product"/>
