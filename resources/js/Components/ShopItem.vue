@@ -13,7 +13,7 @@
                 <p v-else class="text-sm font-semibold text-gray-700">€{{ product.price }}</p>
                 <p v-if="product.giveaway_price">|</p>
                 <p v-if="product.giveaway_price" class="text-sm font-semibold text-secondary">€{{ product.giveaway_price }}</p>
-                <Button v-if="!product.id === $page.props.auth.user.id" @click="addToCart" fill="secondary" textColor="white" class="w-full md:w-1/2">Add to Cart</Button>
+                <Button v-if="!$page.props.auth.user?.id &&!product.id === $page.props.auth.user?.id" @click="addToCart" fill="secondary" textColor="white" class="w-full md:w-1/2">Add to Cart</Button>
             </div>
         </div>
     </div>

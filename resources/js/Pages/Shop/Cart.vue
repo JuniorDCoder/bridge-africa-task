@@ -92,9 +92,7 @@ import Button from '../../Components/Button.vue';
 import { useForm, Link } from '@inertiajs/vue3';
 import { toast } from 'vue3-toastify';
 import { ref, computed } from 'vue';
-import { decrementCartCount } from '@/stores/cartStore';
 import LatestProducts from '../../Components/Sections/LatestProducts.vue';
-import { updateProductQuantity } from '../../helpers/globalHelper';
 
 const props = defineProps({
     cartItems: Array,
