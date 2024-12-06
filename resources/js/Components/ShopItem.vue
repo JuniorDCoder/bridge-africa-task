@@ -1,5 +1,5 @@
 <template>
-    <div data-aos="fade-up" data-aos-delay=300 data-aos-duration=600 class="relative flex flex-col justify-between w-full bg-white rounded-2xl p-7 shadow-custom-light shadow-custom-dark">
+    <div data-aos="fade-up" data-aos-delay=300 data-aos-duration=600 class="relative flex flex-col justify-between w-full bg-white rounded-2xl p-7 shadow-custom-light">
         <div v-if="percentageOff > 0" class="absolute flex items-center justify-center w-8 h-8 p-6 text-white rounded-full right-4 top-4 bg-secondary">
             <span class="text-sm text-center">-{{ percentageOff }}%</span>
         </div>

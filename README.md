@@ -1,67 +1,231 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Bridge Africa Ventures - Online Marketplace
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Overview
 
-## About Laravel
+Bridge Africa Ventures is a company that helps businesses create digital identities. They aim to build an online marketplace platform, **[www.bridgeafrica.com](http://www.bridgeafrica.com)**, where people can expose their products. The platform allows users to manage their store section (products) through CRUD operations. As part of this project, i am building the online marketplace where business owners can:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Login**
+-   **Logout**
+-   **Sign In**
+-   **Create, Read, Update, Delete Products**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This repository contains the codebase for the **Bridge Africa Ventures Marketplace**, built with Laravel 11 and Vue.js, implementing the required user and product management functionalities.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   **User Authentication**: Login, logout, and sign-up functionalities.
+-   **Product Management**: CRUD operations (Create, Read, Update, Delete) for managing products.
+-   **Simple UI**: A minimal and functional interface built with **Vue.js** and **Tailwind CSS** for testing and user interaction.
+-   **Database**: Uses MySQL to store user and product data.
+-   **Backend**: Built with **Laravel 11**.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Technologies Used
 
-## Laravel Sponsors
+-   **Frontend**: Vue.js, Tailwind CSS
+-   **Backend**: Laravel 11
+-   **Database**: MySQL
+-   **Authentication**: Laravel Breeze with Inertia.js for seamless Vue.js integration
+-   **Server**: Apache
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## Installation and Setup
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Prerequisites
 
-## Contributing
+Ensure the following tools are installed:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   **PHP 8.1+** (compatible with Laravel 11)
+-   **Composer**
+-   **MySQL** (for database)
+-   **Node.js and NPM** (for frontend dependencies)
+-   **Apache** (as the server)
 
-## Code of Conduct
+### Clone the Repository
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+git clone https://github.com/JuniorDCoder/bridge-africa-task.git
+cd /bridge-africa-task
+```
 
-## Security Vulnerabilities
+### Set Up Backend (Laravel)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Install Dependencies**:
+
+    Run the following commands to install PHP dependencies:
+
+    ```bash
+    composer install
+    ```
+
+2. **Set Up Environment**:
+
+    Copy the `.env.example` file to `.env`:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Edit the `.env` file to match your database credentials (MySQL).
+
+3. **Generate Application Key**:
+
+    Generate the application key for Laravel:
+
+    ```bash
+    php artisan key:generate
+    ```
+
+4. **Migrate Database**:
+
+    Create the necessary tables:
+
+    ```bash
+    php artisan migrate
+    ```
+
+### Set Up Frontend (Vue.js + Tailwind CSS)
+
+1. **Install Node Dependencies**:
+
+    Install the required JavaScript dependencies:
+
+    ```bash
+    npm install
+    ```
+
+2. **Run Development Server**:
+
+    Compile the frontend assets and run the server:
+
+    ```bash
+    npm run dev
+    ```
+
+### Set Up Apache Server
+
+Ensure your **Apache** server is properly configured to serve the Laravel application. Make sure `mod_rewrite` is enabled and configure your `.htaccess` file as needed.
+
+---
+
+## Features Implementation
+
+### User Authentication (Login, Logout, Sign In)
+
+Using **Laravel Breeze** with **Inertia.js** integration:
+
+-   **Sign In**: Users can create an account with an email and password.
+-   **Login**: Users can log in with their credentials.
+-   **Logout**: Users can log out from the platform.
+
+### Product Management (CRUD Operations)
+
+-   **Create**: Business owners can add products to their store.
+-   **Read**: Users can view the details of products available in the store.
+-   **Update**: Owners can update product information.
+-   **Delete**: Owners can remove products from their store.
+
+---
+
+## MVC Model
+
+Icreated an **MVC** structure for user and product management, ensuring separation of concerns and making it easy to maintain and extend the application.
+
+The following models were used:
+
+-   **User Model**: Handles user authentication and basic account management.
+-   **Product Model**: Handles CRUD operations for products.
+
+### UML Sequence Diagram
+
+A **UML sequence diagram** Found inside public folder, was used to model the flow of user actions (e.g., sign in, product management) across the system.
+
+---
+
+## Project Structure
+
+```plaintext
+bridge-africa-marketplace/
+│
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── AuthController.php
+│   │   │   └── ProductController.php
+│   ├── Models/
+│   │   ├── User.php
+│   │   └── Product.php
+│   └── Providers/
+│       └── AppServiceProvider.php
+│
+├── resources/
+│   ├── js/
+│   │   ├── Components/
+│   │   │   └── ProductList.vue
+│   │   └── Pages/
+│   │       └── Dashboard.vue
+│   ├── views/
+│   │   └── welcome.blade.php
+│
+│
+├── routes/
+│   └── web.php
+│
+└── .env.example
+└── tailwind.config.js
+```
+
+---
+
+## Usage
+
+1. **Start the Application**:
+
+    After setting up the database and running the development server, you can access the application at:
+
+    ```
+    http://localhost
+    ```
+
+2. **Login/Sign Up**:
+
+    - Navigate to `/login` for existing users to sign in.
+    - Navigate to `/register` to create a new account.
+
+3. **Product Management**:
+
+    After logging in, business owners can manage their products via the `/dashboard` page.
+
+    - **Create**: Add new products.
+    - **Read**: View product details.
+    - **Update**: Edit product information.
+    - **Delete**: Remove products from the system.
+
+---
+
+## Expectations
+
+1. **PDF File**: A PDF containing the **MVC model** of the system and a **UML sequence diagram** to explain the flow of actions.
+2. **GitHub Repository**: A public repository with the code for the project, which you can clone using the link provided.
+3. **Production Environment**: Ensure that the code works on an Apache server in a production environment with MySQL as the database.
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# bridge-africa-task
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Authors
+
+-   **Foryoung Junior Ngu** -Developer
+    -   GitHub: [@JuniorDCoder](https://github.com/JuniorDCoder)
+
+---
+
+Feel free to clone, modify, and contribute to this repository. Happy coding!
