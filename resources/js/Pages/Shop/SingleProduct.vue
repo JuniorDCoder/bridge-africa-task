@@ -16,13 +16,13 @@
                     <p v-if="product.giveaway_price" class="text-sm font-semibold text-gray-700">€{{ product.giveaway_price }}</p>
                 </div>
                 <p class="text-gray-700 md:w-4/5 text-md">{{product.description}} </p>
-                <div   v-if="product.user_id !== $page.props.auth.user.id" class="flex w-1/3 md:w-1/5 items-center justify-center md: gap-5 px-2 py-2.5 border border-gray-500 text-gray-700 rounded-sm">
+                <div   v-if="product.user_id !== $page.props.auth.user?.id" class="flex w-1/3 md:w-1/5 items-center justify-center md: gap-5 px-2 py-2.5 border border-gray-500 text-gray-700 rounded-sm">
                     <span @click="decrementQuantity" class="text-2xl cursor-pointer select-none">-</span>
                     <span class="text-2xl cursor-pointer">{{quantity}}</span>
                     <span @click="incrementQuantity" class="text-2xl cursor-pointer select-none">+</span>
                 </div>
                 <p class="text-gray-700">Category: <span>&nbsp;&nbsp;{{product.category.name}}</span> </p>
-                <div v-if="product.user_id !== $page.props.auth.user.id" class="flex items-center justify-between gap-8 md:w-2/3">
+                <div v-if="product.user_id !== $page.props.auth.user?.id" class="flex items-center justify-between gap-8 md:w-2/3">
                     <Button @click="addToCart" fill="white" textColor="secondary" class="w-full md:w-1/2">Add to Cart</Button>
                     <Button :is-link="true" :url="{path: 'shop'}" fill="secondary" textColor="white" class="w-full md:w-1/2">Pay Now</Button>
                 </div>
@@ -34,7 +34,7 @@
                 </div>
 
                 <!-- Delete Button -->
-                <div v-if="product.user_id === $page.props.auth.user.id" class="flex flex-col items-center gap-10 md:flex-row">
+                <div v-if="product.user_id === $page.props.auth.user?.d" class="flex flex-col items-center gap-10 md:flex-row">
                     <form :action="`/products/${product.id}`" method="POST" @submit.prevent="deleteProduct">
                         <Button type="submit" >Delete Product</Button>
                     </form>
